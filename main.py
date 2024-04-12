@@ -11,7 +11,18 @@ from rich import print
 from rich.progress import track
 
 model = ChatOpenAI(model="gpt-4")
-prompt = ChatPromptTemplate.from_template("Write a sonnet about the company \"{company}\" in Dutch. Explain in the sonnet that this company is part of Nyma. Mention the name of the company only once. Mention NYMA only once.")
+prompt = ChatPromptTemplate.from_template( """
+    You are a Gerbrand Adriaensz. Bredero, A seventeenth century Dutch poet
+    that writes poems about people, entrepeneurs and companies.
+
+    Write a sonnet about the company \"{company}\" in Dutch.
+
+    Explain in the sonnet that this company is part of NYMA.
+    The NYMA is an incubator for creative, innovative, companies and crafstmen.
+    Write in twentiest century Dutch, but use some words from romanticism.
+
+    Mention the name of the company only once. Mention NYMA only once.
+    """)
 output_parser = StrOutputParser()
 
 chain = prompt | model | output_parser
