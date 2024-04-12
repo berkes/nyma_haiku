@@ -8,6 +8,7 @@ from langchain_openai import ChatOpenAI
 from langchain_core.output_parsers import StrOutputParser
 from langchain_core.prompts import ChatPromptTemplate
 from rich import print
+from rich.progress import track
 
 model = ChatOpenAI(model="gpt-4")
 prompt = ChatPromptTemplate.from_template("Write a sonnet about the company \"{company}\" in Dutch. Explain in the sonnet that this company is part of Nyma. Mention the name of the company only once. Mention NYMA only once.")
@@ -200,4 +201,5 @@ if __name__ == "__main__":
 
     while True:
         run_chain()
-        time.sleep(wait)
+        for i in track(range(wait), description="Volgend gedicht wordt geschreven..."):
+           time.sleep(1)
