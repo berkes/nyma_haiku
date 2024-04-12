@@ -1,0 +1,18 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "copy_chain"
+
+[packages]
+langchain = "0.1.4"
+langchain-openai = "0.0.4"
+rich = "13.7.1"
+
+langserve = {extras = ["all"], version = "*"}
+pydantic = "1.10.13"
+
+[dev-packages]
+langchain-cli = "*"
+
+[requires]
+python_version = "3.10"
