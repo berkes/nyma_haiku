@@ -145,6 +145,8 @@ companies = [
     "WP Wolf",
     "YUNGS",
 ]
+random.shuffle(companies)
+companies = cycle(companies)
 
 rainbow = cycle([
     "green1",
@@ -164,14 +166,14 @@ def run_chain():
     # Clear the terminal
     os.system("clear")
 
-    random_company = random.choice(companies)
-    company_re = re.compile(re.escape(random_company), re.IGNORECASE)
+    company = next(companies)
+    company_re = re.compile(re.escape(company), re.IGNORECASE)
     nyma_re = re.compile(r"NYMA", re.IGNORECASE)
 
 
     first_chunk = True
-    print(f"[bold cyan]{random_company}[/bold cyan] zit ook in de [bold]NYMA[/bold].\n\t")
-    for chunk in chain.stream({"company": random_company}):
+    print(f"[bold cyan]{company}[/bold cyan] zit ook in de [bold]NYMA[/bold].\n\t")
+    for chunk in chain.stream({"company": company}):
         # Start the first chunk with a tab
         if first_chunk:
             first_chunk = False
@@ -181,7 +183,7 @@ def run_chain():
         color = next(rainbow)
         chunk = chunk.replace("\n", "\n\t")
         # replace the company name with a bold version
-        chunk = company_re.sub("[bold]"+random_company+"[/bold]", chunk)
+        chunk = company_re.sub("[bold]"+company+"[/bold]", chunk)
         # replace NYMA with a bold version
         chunk = nyma_re.sub("[bold]NYMA[/bold]", chunk)
 
